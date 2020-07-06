@@ -16,6 +16,11 @@ help:
 init:
 	@poetry install
 
+.PHONY: lint
+lint:
+	@[[ -d .venv ]] || ${MAKE} init
+	@poetry run flake8 src tests
+
 .PHONY: notebooks #: Run Jupyter notebooks
 notebooks:
 	@[[ -d .venv ]] || ${MAKE} init
