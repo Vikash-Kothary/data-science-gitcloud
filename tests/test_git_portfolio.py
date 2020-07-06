@@ -1,4 +1,4 @@
-from git_migration import __version__
+from git_portfolio import __version__
 
 
 def test_version():

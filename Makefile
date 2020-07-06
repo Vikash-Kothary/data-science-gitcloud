@@ -21,6 +21,11 @@ notebooks:
 	@[[ -d .venv ]] || ${MAKE} init
 	@poetry run jupyter lab
 
+.PHONY: tests
+tests:
+	@[[ -d .venv ]] || ${MAKE} init
+	@poetry run pytest tests
+
 .PHONY: run
 run:
 	@flask run
