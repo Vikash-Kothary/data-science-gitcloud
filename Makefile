@@ -17,8 +17,9 @@ init:
 	@poetry install
 
 .PHONY: notebooks #: Run Jupyter notebooks
-notebooks: init
-	@poetry run jupyter notebook --notebook-dir=./notebooks
+notebooks:
+	@[[ -d .venv ]] || ${MAKE} init
+	@poetry run jupyter lab
 
 .PHONY: run
 run:
