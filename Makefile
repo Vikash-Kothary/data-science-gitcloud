@@ -19,3 +19,7 @@ init:
 .PHONY: notebooks #: Run Jupyter notebooks
 notebooks: init
 	@poetry run jupyter notebook --notebook-dir=./notebooks
+
+.PHONY: run
+run:
+	@flask run

@@ -6,13 +6,15 @@ authors = ["Vikash Kothary <kothary.vikash@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-PyGithub = "^1.45"
-python-gitlab = "^2.0.0"
-gitpython = "^3.0.5"
+flask = "^1.1.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.6"
 jupyter = "^1.0.0"
+PyGithub = "^1.45"
+python-gitlab = "^2.0.0"
+gitpython = "^3.0.5"
+python-dotenv = "^0.13.0"
 mkdocs = "^1.1.2"
 
 [build-system]
