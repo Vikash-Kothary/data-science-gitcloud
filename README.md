@@ -1,2 +1,2 @@
-# Git Migration
-> Move git repositories between git providers.
+# Git Portfolio
+> Manage all your Git repositories, organisations, providers from one place.
