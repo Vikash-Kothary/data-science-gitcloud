@@ -7,6 +7,7 @@ authors = ["Vikash Kothary <kothary.vikash@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.7"
 flask = "^1.1.2"
+flask-swagger = "^0.2.14"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.6"
