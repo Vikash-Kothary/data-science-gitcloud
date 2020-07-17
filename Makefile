@@ -14,11 +14,6 @@ export
 help:
 	@awk 'BEGIN {FS = " ?#?: "; print ""$(GIT_PORTFOLIO_NAME)" "$(GIT_PORTFOLIO_VERSION)"\n"$(GIT_PORTFOLIO_DESCRIPTION)"\n\nUsage: make \033[36m<command>\033[0m\n\nCommands:"} /^.PHONY: ?[a-zA-Z_-]/ { printf "  \033[36m%-10s\033[0m %s\n", $$2, $$3 }' $(MAKEFILE_LIST)
 
-.PHONY: init
-init:
-	@$(OPEN) http://localhost:8080
-	@$(MKDOCS) serve -f docs/mkdocs.yml
-
 .PHONY: docs
 docs:
 	@$(OPEN) http://localhost:8080
