@@ -6,7 +6,7 @@ GIT_PORTFOLIO_VERSION ?= "v0.1.0"
 GIT_PORTFOLIO_DESCRIPTION ?= "Manage all your Git repositories, organisations, providers from one place."
 ENV ?= local
 
-include config/.env.${ENV}
+-include config/.env.${ENV}
 export
 
 .DEFAULT_GOAL := help
