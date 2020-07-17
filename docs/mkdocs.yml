@@ -5,5 +5,5 @@ site_description: Manage all your Git repositories, organisations, providers fro
 site_author: Vikash Kothary
 site_url: https://vikash-kothary.github.io/git-portfolio
 repo_url: https://github.com/vikash-kothary/git-portfolio
-docs_dir: source
+docs_dir: src
 site_dir: build
