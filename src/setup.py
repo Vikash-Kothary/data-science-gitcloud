@@ -1,19 +1,9 @@
+from setuptools import setup, find_packages
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
-import toml
-
-project = toml.load('../pyproject.toml')
-
-setup(
-    long_description='',
-    name=project['tool']['poetry']['name'],
-    version=project['tool']['poetry']['version'],
-    description=project['tool']['poetry']['description'],
-    python_requires='==3.*,>=3.7.0',
-    author='Vikash Kothary',
-    author_email='kothary.vikash@gmail.com',
-    install_requires=['flask==1.*,>=1.1.2']
-)
+setup(name="data-science-gitcloud",
+      version="0.1.0",
+      description="",
+      author="Vikash Kothary",
+      author_email="kothary.vikash@gmail.com",
+      packages=find_packages()
+    )
