@@ -1,9 +1,11 @@
 strict: true
 theme: readthedocs
-site_name: Git Portfolio
+site_name: data-science-gitcloud
 site_description: Manage all your Git repositories, organisations, providers from one place.
 site_author: Vikash Kothary
-site_url: https://vikash-kothary.github.io/git-portfolio
-repo_url: https://github.com/vikash-kothary/git-portfolio
+site_url: https://vikash-kothary.gitlab.io/data-science-projects/data-science-gitcloud
+repo_url: https://gitlab.com/vikash-kothary/data-science-projects/data-science-gitcloud
 docs_dir: src
 site_dir: build
+plugins:
+  - mkdocs-jupyter
