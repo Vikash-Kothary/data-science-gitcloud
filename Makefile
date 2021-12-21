@@ -1,49 +1,59 @@
-#/bin/make
+#!/usr/bin/env make
 
-SHELL := /bin/bash
-GIT_PORTFOLIO_NAME ?= "Git Portfolio"
-GIT_PORTFOLIO_VERSION ?= "v0.1.0"
-GIT_PORTFOLIO_DESCRIPTION ?= "Manage all your Git repositories, organisations, providers from one place."
+DATA_SCIENCE_GITCLOUD_ID ?= 20015553
+DATA_SCIENCE_GITCLOUD_NAME ?= data-science-gitcloud
+DATA_SCIENCE_GITCLOUD_VERSION ?= v0.1.0
+DATA_SCIENCE_GITCLOUD_DESCRIPTION ?= Manage all your Git repositories, organisations, providers from one place.
+
 ENV ?= local
-
 -include config/.env.${ENV}
+-include config/secrets/.env.*.${ENV}
 export
 
 .DEFAULT_GOAL := help
-.PHONY: help #: Display this self documenting help dialog
+.PHONY: help #: List available commands.
 help:
-	@awk 'BEGIN {FS = " ?#?: "; print ""$(GIT_PORTFOLIO_NAME)" "$(GIT_PORTFOLIO_VERSION)"\n"$(GIT_PORTFOLIO_DESCRIPTION)"\n\nUsage: make \033[36m<command>\033[0m\n\nCommands:"} /^.PHONY: ?[a-zA-Z_-]/ { printf "  \033[36m%-10s\033[0m %s\n", $$2, $$3 }' $(MAKEFILE_LIST)
+	@${AWK} 'BEGIN {FS = " ?#?: "; print "$(DATA_SCIENCE_GITCLOUD_NAME) $(DATA_SCIENCE_GITCLOUD_VERSION)\n$(DATA_SCIENCE_GITCLOUD_DESCRIPTION)\n\nUsage: make \033[36m<command>\033[0m\n\nCommands:"} /^.PHONY: ?[a-zA-Z_-]/ { printf "  \033[36m%-10s\033[0m %s\n", $$2, $$3 }' $(MAKEFILE_LIST)
 
-.PHONY: docs
+.PHONY: docs #: Run documentation.
 docs:
-	@$(OPEN) http://localhost:8080
-	@$(MKDOCS) serve -f docs/mkdocs.yml
+	@${MKDOCS} ${MKDOCS_OPTS} -f docs/mkdocs.yml
 
-.PHONY: notebooks #: Run Jupyter notebooks
-notebooks:
-	@$(JUPYTER) lab
-
-.PHONY: lint
+.PHONY: lint #: Run linting.
 lint:
-	@$(OPEN) reports/index.html
-	@$(FLAKE8) --format=html --htmldir=reports src tests
+	@${PRECOMMIT} run --all-files
+# 	@$(FLAKE8) --format=html --htmldir=reports src tests
 
-.PHONY: tests
+.PHONY: tests #: Run tests.
 tests:
-	@$(PYTEST) tests
+	@${PYTEST} --doctest-modules tests/
 
-.PHONY: run
-run:
-	@$(OPEN) http://localhost:5000
-	@$(FLASK) run
+.PHONY: run #: Run application.
+run: 
+	@${UVICORN} gitcloud_app.main:app --reload
 
-.PHONY: clean #: Delete build files.
+# Run scripts using make
+%:
+	@if [[ -f "scripts/${*}.sh" ]]; then \
+	${BASH} "scripts/${*}.sh" ${LOGGER}; fi
+
+.PHONY: init #: Download project dependencies.
+init:
+	@${POETRY} install
+
+.PHONY: config #: Create environment-specific config files.
+config: config/.env.${ENV}
+config/.env.%:
+	@cp -n config/.env.example config/.env.${ENV}
+
+.PHONY: open #: Open application in the browser.
+open:
+	@${OPEN} ${DATA_SCIENCE_GITCLOUD_URL}
+
+.PHONY: clean #: Clean project build files.
 clean:
 	@[[ -z "${FORCE}" ]] || rm -r .venv
 	@find . -name .ipynb_checkpoints -type d -not -path .venv -print0 | xargs -0 rm -r
 	@find . -name __pycache__ -type d -not -path .venv -print0 | xargs -0 rm -r
 	@find . -name *.pytest_cache -type d -not -path .venv -print0 | xargs -0 rm -r
 	@find . -name *.egg-info -type d -not -path .venv -print0 | xargs -0 rm -r
-
-%:
-	@sh scripts/$(*).sh
