@@ -11,3 +11,6 @@ views = Blueprint('views', __name__,
 def index():
     return render_template('index.html')
 
+@views.route('/repos')
+def repos():
+    return render_template('repos.html')
