@@ -1,5 +1,7 @@
 
+from gitcloud_utils import config
+
 __all__ = []
 
-__app__ = 'gitcloud'
-__version__ = '0.1.0'
+__title__ = config.OPENAPI_TITLE
+__version__ = config.OPENAPI_VERSION
