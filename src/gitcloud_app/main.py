@@ -1,21 +1,24 @@
-from flask import Flask
+import uvicorn
+from fastapi import FastAPI, HTTPException
 
-from git_portfolio import data
-from git_portfolio import features
-from git_portfolio import models
-from git_portfolio import visualise
-from git_portfolio import utils
+# from gitcloud_data import data
+# from gitcloud_features import features
+# from gitcloud_models import models
+# from gitcloud_visualisations import visualise
+# from getcloud_services import services
+from gitcloud_utils import config
 
-
-def create_app():
-    app = Flask(__name__)
-    data.register_app(app)
-    features.register_app(app)
-    models.register_app(app)
-    visualise.register_app(app)
-    utils.register_app(app)
-    return app
-    
+app = FastAPI(
+    title=config.OPENAPI_TITLE,
+    version=config.OPENAPI_VERSION,
+    description=config.OPENAPI_DESCRIPTION,
+    docs_url='/'
+)
+# app.include_router(data, prefix='/api/v1/data', tags=['Data'])
+# app.include_router(features, prefix='/api/v1/features', tags=['Features'])
+# app.include_router(models, prefix='/api/v1/models', tags=['Models'])
+# app.include_router(visualise, prefix='/api/v1/visualisations', tags=['Visualisations'])
+# app.include_router(services, prefix='/api/v1/services', tags=['Services'])
 
 if __name__ == '__main__':
-    create_app()
+    uvicorn.run(app, **config)
