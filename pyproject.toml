@@ -3,6 +3,9 @@ name = "data-science-gitcloud"
 version = "0.1.0"
 description = "Manage all your Git repositories, organisations, providers from one place."
 authors = ["Vikash Kothary <kothary.vikash@gmail.com>"]
+packages = [
+    { include = "gitcloud_app", from = "src" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
