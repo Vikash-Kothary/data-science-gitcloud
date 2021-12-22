@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 
 from gitcloud_data import data
 from gitcloud_features import features
