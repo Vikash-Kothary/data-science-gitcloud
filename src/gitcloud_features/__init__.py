@@ -27,7 +27,7 @@ async def get_repositories():
     return {"data": repos}
 
 @features.get("/repos/{repo_id}")
-async def get_repositorie_by_id(repo_id: int):
+async def get_repository_by_id(repo_id: int):
     if (repo_id != 0):
         raise HTTPException(status_code=404, detail="Repo not found")
 
