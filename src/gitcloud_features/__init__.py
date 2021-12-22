@@ -54,7 +54,7 @@ async def get_repository_by_id(repo_id: int):
     repo['has_unpushed_changes'] = True
     repo['has_unpulled_changes'] = False
     repo['commits_count'] = 1
-    return {"data": repo}
+    return repo
 
 @features.get("/templates")
 async def get_templates():
